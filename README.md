@@ -1,109 +1,107 @@
 # 🚌 Smart Campus Crowd Predictor
 
-An AIML project that predicts the expected crowd level at a campus location as
-**Low, Medium, or High** using structured historical-style campus data.
+An AIML-based application that predicts the expected crowd level at a campus location as **Low, Medium, or High** using factors such as location, time, weather, exam schedules, events, and previous crowd conditions.
 
-## Features
+## 🚀 Live Demo
 
-- Campus location
-- Day of week
-- Hour
-- Weather
-- Exam week status
-- Special event status
-- Previous crowd level
-- Random Forest multi-class classification
-- Prediction probabilities
-- Streamlit web interface
-- Dataset overview
+[Smart Campus Crowd Predictor](https://smart-campus-crowd-predictor-renusree.streamlit.app/)
 
-## Dataset
+## ✨ Features
 
-The included dataset contains **2,000 synthetic records**.
+- 📍 Campus location-based prediction
+- 📅 Day of the week
+- 🕐 Hour-based prediction
+- 🌦️ Weather conditions
+- 📚 Exam week status
+- 🎉 Special event status
+- 🔄 Previous crowd level
+- 🤖 Random Forest multi-class classification
+- 📊 Prediction probability display
+- 🌐 Interactive Streamlit web interface
 
-It was generated with `src/generate_dataset.py` using reproducible rules based on
-plausible campus crowd patterns. It is **not claimed to be real VIT/student data**
-and should not be described as collected from students.
+## 🧠 Machine Learning Approach
 
-The target column is `Crowd_Level` with three classes:
+### Problem Type
+
+**Supervised Learning → Multi-Class Classification**
+
+The model predicts one of three crowd levels:
+
 - Low
 - Medium
 - High
 
-## Machine Learning Pipeline
+### Algorithm
+
+**Random Forest Classifier**
+
+Random Forest was used because it is well suited for structured/tabular data and can capture non-linear relationships between input features and crowd levels.
+
+### Data Preprocessing
+
+Categorical features are converted into numerical representations using **One-Hot Encoding**.
+
+The machine learning pipeline includes:
+
+1. Data preprocessing using Pandas
+2. Feature and target separation
+3. One-Hot Encoding
+4. Train-test split
+5. Random Forest model training
+6. Model evaluation
+7. Model serialization using Joblib
+
+## 📊 Dataset
+
+The project uses a **2,000-record synthetic dataset** generated using reproducible rules based on plausible campus crowd patterns.
+
+The dataset contains:
+
+- Location
+- Day
+- Hour
+- Weather
+- Exam Week
+- Event Day
+- Previous Crowd
+- Crowd Level
+
+The dataset is **synthetic and is not real VIT/student data**.
+
+For real-world deployment, the model could be retrained using anonymized campus occupancy or footfall data.
+
+## 📈 Model Evaluation
+
+The Random Forest model achieved approximately **74.5% test accuracy** on the synthetic dataset.
+
+This result represents a prototype evaluation and should not be interpreted as real-world campus prediction performance.
+
+## 🛠️ Technologies Used
+
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Streamlit
+- Joblib
+- Matplotlib
+
+## 📁 Project Structure
 
 ```text
-Synthetic/structured campus data
-          ↓
-    Feature separation
-          ↓
-    One-Hot Encoding
-          ↓
-     Train/Test Split
-          ↓
-   Random Forest Classifier
-          ↓
-   Model Evaluation
-          ↓
-   Saved Joblib Pipeline
-          ↓
-     Streamlit Prediction App
-```
-
-## Run the project
-
-### 1. Create and activate virtual environment
-
-```bash
-python -m venv venv
-```
-
-Windows Command Prompt:
-
-```cmd
-venv\Scripts\activate
-```
-
-### 2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Generate the dataset (optional)
-
-```bash
-python src/generate_dataset.py
-```
-
-### 4. Train the model
-
-```bash
-python src/train_model.py
-```
-
-### 5. Start the application
-
-```bash
-streamlit run app.py
-```
-
-Then open the local Streamlit URL shown in the terminal.
-
-## Interview explanation
-
-This is a supervised multi-class classification project. The model learns from
-labeled historical-style records where the input features describe campus
-conditions and `Crowd_Level` is the target variable.
-
-Random Forest was selected because it is suitable for structured/tabular data and
-can model non-linear relationships between the input features and crowd classes.
-
-## Future improvements
-
-- Replace synthetic data with real anonymized occupancy/count data.
-- Add real-time sensor or entry-count integration.
-- Add time-series forecasting.
-- Add historical trend dashboards.
-- Compare multiple ML algorithms.
-- Deploy the Streamlit app to a cloud platform.
+Smart-Campus-Crowd-Predictor/
+│
+├── data/
+│   └── campus_crowd.csv
+│
+├── models/
+│   └── crowd_model.joblib
+│
+├── src/
+│   ├── generate_dataset.py
+│   └── train_model.py
+│
+├── app.py
+├── requirements.txt
+├── README.md
+└── .gitignore
